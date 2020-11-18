@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h2>1# EzQuiz</h2>
+        <div class="card">
+            <div class="card-body">
+            <div class="row" id="music">
+                
+            </div>
+        </div>
+        </div>
+      </div>
+
+
+
+
+      <script>
+        let requestURL = 'ezquiz.json'; 
+        let request = new XMLHttpRequest(); 
+        request.onreadystatechange = function () { 
+            if (request.readyState == 4 && request.status == 200) {             
+                dataReportStatus(JSON.parse(request.responseText));            
+            } }; 
+        request.open("GET", requestURL, true); 
+        request.send(); 
+        
+        function dataReportStatus(data) { 
+            for (let i = 0; i < data.tracks.items.length; i++) {
+            document.getElementById('music').innerHTML +=  '<div class="col-4">'+ '<img src="' + data.tracks.items[i].album.images[0].url + '"width="100%">' +           '<h5 class="card-title">'+data.tracks.items[i].album.name+'</h5>' +'<p class="card-text">'+'Artist: '+data.tracks.items[i].album.artists[0].name+'</p>' +'<p class="card-text">'+'Release date: '+data.tracks.items[i].album.release_date+'</p>' +
+          '<p class="card-text">'+'Avaliable: '+data.tracks.items[i].album.available_markets.length+' countries'+'</p>'+  '</div>'
+            }
+
+        }
+    </script> 
+
+
+
+
+
+
+</body>
+</html>
+
+
